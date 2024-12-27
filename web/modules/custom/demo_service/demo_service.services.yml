@@ -1,0 +1,3 @@
+services:
+  demo_service.message_formatter:
+    class: Drupal\demo_service\Service\MessageFormatter

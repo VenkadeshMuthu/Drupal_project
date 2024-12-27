@@ -1,0 +1,74 @@
+<?php
+
+use Drupal\node\Entity\NodeType;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Implements hook_install().
+ */
+function student_details_install() {
+  // Create the content type.
+  if (!NodeType::load('student_details')) {
+    $type = NodeType::create([
+      'type' => 'student_details',
+      'name' => 'Student Details',
+    ]);
+    $type->save();
+
+    // Set description and other settings for the content type.
+    \Drupal::configFactory()->getEditable('node.type.student_details')
+      ->set('description', 'A content type for storing student details.')
+      ->set('display_submitted', TRUE)
+      ->save();
+  }
+
+  // Create fields for the content type.
+  // Name field.
+  if (!FieldStorageConfig::loadByName('node', 'field_name')) {
+    FieldStorageConfig::create([
+      'field_name' => 'field_name',
+      'entity_type' => 'node',
+      'type' => 'string',
+      'settings' => [
+        'max_length' => 255,
+      ],
+    ])->save();
+  }
+  FieldConfig::create([
+    'field_name' => 'field_name',
+    'entity_type' => 'node',
+    'bundle' => 'student_details',
+    'label' => 'Name',
+  ])->save();
+
+  // Age field.
+  if (!FieldStorageConfig::loadByName('node', 'field_age')) {
+    FieldStorageConfig::create([
+      'field_name' => 'field_age',
+      'entity_type' => 'node',
+      'type' => 'integer',
+    ])->save();
+  }
+  FieldConfig::create([
+    'field_name' => 'field_age',
+    'entity_type' => 'node',
+    'bundle' => 'student_details',
+    'label' => 'Age',
+  ])->save();
+
+  // Description field.
+  if (!FieldStorageConfig::loadByName('node', 'field_description')) {
+    FieldStorageConfig::create([
+      'field_name' => 'field_description',
+      'entity_type' => 'node',
+      'type' => 'text_long',
+    ])->save();
+  }
+  FieldConfig::create([
+    'field_name' => 'field_description',
+    'entity_type' => 'node',
+    'bundle' => 'student_details',
+    'label' => 'Description',
+  ])->save();
+}

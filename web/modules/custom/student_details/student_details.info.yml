@@ -1,0 +1,8 @@
+name: 'Student Details'
+type: module
+description: 'Creates a custom content type for storing student details.'
+core_version_requirement: ^9 || ^10
+package: Custom
+dependencies:
+  - field:field
+  - node:node

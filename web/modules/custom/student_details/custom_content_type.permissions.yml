@@ -1,0 +1,9 @@
+create student_details content:
+  title: 'Create new Student Details content'
+  description: 'Permission to create Student Details content.'
+  restrict access: true
+
+edit own student_details content:
+  title: 'Edit own Student Details content'
+  description: 'Permission to edit own Student Details content.'
+  restrict access: true

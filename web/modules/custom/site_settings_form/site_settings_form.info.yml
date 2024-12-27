@@ -1,0 +1,5 @@
+name: Site Settings Form
+type: module
+description: Provides a configuration form for site-wide settings.
+package: Custom
+core_version_requirement: ^9 || ^10

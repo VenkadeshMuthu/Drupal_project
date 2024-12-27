@@ -1,0 +1,7 @@
+demo_service.demo_page:
+  path: '/demo-service'
+  defaults:
+    _controller: '\Drupal\demo_service\Controller\DemoController::demoPage'
+    _title: 'Demo Service'
+  requirements:
+    _permission: 'access content'

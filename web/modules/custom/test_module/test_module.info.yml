@@ -1,0 +1,7 @@
+name: 'Test Module'
+type: module
+description: 'A custom module for testing.'
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:node

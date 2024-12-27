@@ -1,0 +1,98 @@
+<?php
+use Drupal\node\Entity\Node;
+/**
+ * Implements hook_form_alter().
+ */
+function drupalup_user_form_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'drupalup_user_form_create') {
+    $form['#title'] = t('Add user');
+    $form['name_1']['#title'] = t('Full Name');
+    $form['#submit'][] = 'drupalup_user_form_submit_handler';
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function drupalup_user_form_submit_handler(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  \Drupal::messenger()->addMessage(t('Custom submit handler executed!'));
+}  
+
+/**
+ * Implements hook_theme().
+ */
+function drupalup_user_form_theme() {
+  return [
+    'custom_page_template' => [
+      'template' => 'custom-page-template', // Refers to templates/custom-page-template.html.twig
+      'variables' => [
+        'title' => 'hi i am change',
+        'content' => 'this is my own content',
+      ],
+      'path' => drupal_get_path('module', 'drupalup_user_form') . '/templates',
+    ],
+  ];
+}
+/**
+* hook_node_insert().
+*/
+
+function drupalup_user_form_node_insert(Node $node) {
+  // Get the created time (timestamp).
+  $created_time = $node->getCreatedTime();
+
+  // Format the timestamp (you can change the format to suit your needs).
+  $formatted_created_time = \Drupal::service('date.formatter')->format($created_time, 'custom', 'd-m-Y H:i:s');
+
+  // Show a message to the user with the node title and its creation time.
+  \Drupal::messenger()->addMessage(t('Node "@title" created on @created_time', [
+    '@title' => $node->getTitle(),
+    '@created_time' => $formatted_created_time,
+  ]));
+}
+/**
+ * Implements hook_user_login().
+ */
+function drupalup_user_form_user_login($account) {
+  // Display a success message after login.
+  \Drupal::messenger()->addMessage(t('Login successful! Welcome, @username.', ['@username' => $account->getAccountName()]));
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function drupalup_user_form_user_logout($account) {
+  // Display a message after logout.
+  \Drupal::messenger()->addMessage(t('You have been logged out successfully.'));
+}
+/**
+ * Implements hook_block_info().
+ */
+function drupalup_user_form_block_info() {
+  $blocks = array();
+
+  // Define a custom block.
+  $blocks['custom_block'] = array(
+    'info' => t('My Custom Block'),  // Block title.
+    'cache' => DRUPAL_CACHE_PERMANENT,  // Cache settings.
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function drupalup_user_form_block_view($delta = '') {
+  $block = array();
+
+  // Render the custom block content.
+  switch ($delta) {
+    case 'custom_block':
+      $block['subject'] = t('Custom Block Title');
+      $block['content'] = t('This is my custom block content.');
+      break;
+  }
+
+  return $block;
+}

@@ -1,0 +1,5 @@
+drupalup_user_form_styles:
+  version: 1.x
+  css:
+    theme:
+      css/drupalup_user_form.css: {}

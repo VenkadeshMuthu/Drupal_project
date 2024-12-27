@@ -1,0 +1,16 @@
+name: 'My Custom Theme'
+type: theme
+description: 'A custom theme for my Drupal site.'
+core_version_requirement: ^9 || ^10
+package: Custom
+base theme: stable9 # You can use stable9, classy, or leave blank for a ground-up theme.
+libraries:
+  - my_custom_theme/global-styling
+regions:
+  header: 'Header'
+  primary_menu: 'Primary Menu'
+  secondary_menu: 'Secondary Menu'
+  content: 'Content'
+  sidebar_first: 'First Sidebar'
+  sidebar_second: 'Second Sidebar'
+  footer: 'Footer'

@@ -1,0 +1,7 @@
+test_module.route_name:
+  path: '/test_module'
+  defaults:
+    _controller: '\Drupal\test_module\Controller\TestModuleController::content'
+    _title: 'Test Module Page'
+  requirements:
+    _permission: 'access content'

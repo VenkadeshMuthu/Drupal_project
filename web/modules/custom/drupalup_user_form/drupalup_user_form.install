@@ -1,0 +1,55 @@
+<?php
+/**
+ * Implements hook_schema().
+ */
+function drupalup_user_form_schema() {
+  $schema['drupalup_user_form_table'] = array(
+    'description' => 'Custom table to store user form submissions.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'The unique identifier for the row.',
+      ),
+      'name_1' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'First name.',
+      ),
+      'name_2' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Last name.',
+      ),
+      'phone' => array(
+        'type' => 'varchar',
+        'length' => 20,
+        'description' => 'Phone number.',
+      ),
+      'email' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'Email address.',
+      ),
+      'address' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'address.',
+      ),
+      'created' => [
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'default' => 0,
+          'description' => 'Timestamp when the record was created.',
+        ],
+    ),
+    'primary key' => array('id'),
+  );
+  
+  return $schema;
+}

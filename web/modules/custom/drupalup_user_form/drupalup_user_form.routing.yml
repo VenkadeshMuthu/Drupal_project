@@ -1,0 +1,54 @@
+drupalup_user_form.create_user:
+  path: '/admin/user/create'
+  defaults:
+    _form: '\Drupal\drupalup_user_form\Controller\UserCreateController'
+    _title: 'Create User'
+  requirements:
+    _permission: 'administer site configuration'
+
+drupalup_user_form.user_data:
+  path: '/admin/user/data'
+  defaults:
+    _controller: '\Drupal\drupalup_user_form\Controller\UserReadController::displayUsers'
+    _title: 'User Data'
+  requirements:
+    _permission: 'administer site configuration'
+
+drupalup_user_form.update_user:
+  path: '/admin/user/update/{id}'
+  defaults:
+    _form: '\Drupal\drupalup_user_form\Controller\UserUpdateController'
+    _title: 'Update User'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    parameters:
+      id:
+        type: 'integer'
+
+drupalup_user_form.delete_user:
+  path: '/admin/user/delete/{id}'
+  defaults:
+    _controller: '\Drupal\drupalup_user_form\Controller\UserDeleteController::deleteUser'
+    _title: 'Delete User'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    parameters:
+      id:
+        type: 'integer'
+drupalup_user_form.email:
+  path: '/send-email'
+  defaults:
+    _controller: '\Drupal\drupalup_user_form\Controller\EmailController::sendEmail'
+    _title: 'Send Email'
+  requirements:
+    _permission: 'administer site configuration'
+
+drupalup_user_form.page:
+  path: '/custom-page'
+  defaults:
+    _controller: '\Drupal\drupalup_user_form\Controller\CustomPageController::customPage'
+    _title: 'Custom Page'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,7 @@
+site_settings_form.module name:
+  path: '/admin/config/system/site-settings'
+  defaults:
+    _form: '\Drupal\site_settings_form\Form\SiteSettingsForm'
+    _title: 'Site Settings'
+  requirements:
+    _permission: 'administer site configuration'
