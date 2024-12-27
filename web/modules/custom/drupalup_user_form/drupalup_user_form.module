@@ -26,7 +26,7 @@ function drupalup_user_form_theme() {
     'custom_page_template' => [
       'template' => 'custom-page-template', // Refers to templates/custom-page-template.html.twig
       'variables' => [
-        'title' => 'hi i am change',
+        'title' => 'hi i am change for git know',
         'content' => 'this is my own content',
       ],
       'path' => drupal_get_path('module', 'drupalup_user_form') . '/templates',
